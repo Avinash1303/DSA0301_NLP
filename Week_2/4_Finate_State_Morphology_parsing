@@ -1,0 +1,38 @@
+class PluralizationFSM:
+    def __init__(self):
+        self.state = 'start'
+        self.plural = ''
+
+    def transition(self, input_symbol):
+        if self.state == 'start':
+            if input_symbol.isalpha():
+                self.state = 'processing'
+                self.plural += input_symbol
+            else:
+                self.state = 'error'
+        elif self.state == 'processing':
+            if input_symbol.isalpha():
+                self.plural += input_symbol
+            else:
+                self.state = 'error'
+        elif self.state == 'error':
+            pass
+
+    def generate_plural(self):
+        if self.state == 'processing':
+            self.plural += 's'
+        return self.plural
+
+
+def generate_plural_form(singular_noun):
+    fsm = PluralizationFSM()
+    for char in singular_noun:
+        fsm.transition(char)
+    return fsm.generate_plural()
+
+
+# Test the FSM with example nouns
+nouns = ["car", "dog", "sheep", "fox"]
+for noun in nouns:
+    plural = generate_plural_form(noun)
+    print(f"{noun} (Singular) -> {plural} (Plural)")

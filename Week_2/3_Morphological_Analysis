@@ -1,0 +1,30 @@
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+
+# Download NLTK data if not already downloaded
+nltk.download('punkt')
+nltk.download('wordnet')
+
+# Sample text for morphological analysis
+text = "The quick brown foxes are jumping over the lazy dogs. Foxes love jumping."
+
+# Tokenize the text into words
+words = word_tokenize(text)
+
+# Perform stemming using the Porter Stemmer
+stemmer = PorterStemmer()
+stemmed_words = [stemmer.stem(word) for word in words]
+
+# Perform lemmatization using WordNet Lemmatizer
+lemmatizer = WordNetLemmatizer()
+lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
+
+# Display the original, stemmed, and lemmatized words
+print("Original words:")
+print(words)
+print("\nStemmed words:")
+print(stemmed_words)
+print("\nLemmatized words:")
+print(lemmatized_words)
